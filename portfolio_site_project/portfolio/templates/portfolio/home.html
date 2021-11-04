@@ -1,17 +1,37 @@
-<h1>Bors1k's портфолио</h1>
-{% load static %}
+{% extends 'portfolio/base.html' %}
+{% block content %}
+    <div class="container">
+    {% load static %}
+    <div class="row justify-content-center my-3">
+        <div class="col-5">
+          <img src="{% static 'portfolio/mainphoto.jpg' %}" class="img-fluid">
+        </div>
+    </div>
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-9 text-center">
+            <h1 id="hometext" class="font-weight-bold">Mikhail Bors1k is begining web developer and lives in Moscow</h1>
+        </div>
+    </div>
 
-<a href="{% static 'portfolio/Resume.pdf' %}" >Мое резюме</a>
-<a href="{% url 'blog:all_blogs' %}">Мой блог</a>
-<img src="{% static 'portfolio/mainphoto.jpg' %}" width="25%">
+    <h2 class="mt-5">Portfolio</h2>
+    <hr>
+    <div class="row">
+    {% for project in projects %}
+    <div class="col-lg-4 col-md-6">
 
-{% for proj in projects %}
+        {% if project.url %}
+        <a href="{{ project.url }}">
+        <img src="{{ project.image.url }}" class="img-fluid mb-2">
+        </a>
+        {% else %}
 
+        <img src="{{ project.image.url }}" class="img-fluid mb-2">
+        {% endif %}
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.description }}</p>
 
-<h2>{{proj.title}}</h2>
-<p>{{proj.description}}</p>
-<img src="{{proj.image.url}}">
-{% if proj.url %}
-<br> <a href="{{proj.url}}">Link</a>
-{% endif %}
-{% endfor %}
+    </div>
+    {% endfor %}
+    </div>
+
+{% endblock content %}
