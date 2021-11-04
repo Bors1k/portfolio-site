@@ -2,6 +2,7 @@
 {% load static %}
 
 <a href="{% static 'portfolio/Resume.pdf' %}" >Мое резюме</a>
+<a href="{% url 'blog:all_blogs' %}">Мой блог</a>
 <img src="{% static 'portfolio/mainphoto.jpg' %}" width="25%">
 
 {% for proj in projects %}
